@@ -1,21 +1,21 @@
 1. Authorize HTTP v1 send requests:
-curl -X POST -H "Authorization: Beare AAAACnGjUfY:APA91bEqWPvvKL047X_heqKdicHUy83-SJimyD7i16vGxb2CXSw1F7eUZ-aVFMlF4UK-FjhCwjiyIKQPQiYFPl-Qt_WpdQetZQ1ZikHU5XTIsWc65T8_yT-btU7oWq2XUhGe8diyXWjm4BJQgNFe87tTUUdXTlbSgw" -H "Content-Type: application/json" -d '{
+curl -X POST -H "Authorization: Beare <server_key>" -H "Content-Type: application/json" -d '{
 "message":{
   "notification": {
     "title": "FCM Message",
     "body": "This is an FCM Message",
   },
-  "token": "dUQJNo9o2lw:APA91bGXgOGsRa1wxeQCp4WuAvv9UzQYknluVMydGV_C-Sa76xwU8_Oc1-hgfDEockpBIIZqwP9pjzGkq9BCFyehVenHoHcXZ5dd1wVPlNCgFDh1QwdLOnnpi7skMh0s3MebKfHERUNX"
+  "token": "<client_app_token>"
   }
 }' https://fcm.googleapis.com/v1/projects/my-project-test-1054/messages:send
 
 2. Authorize legacy protocol send requests (work for this demo):
-curl -X POST -H "Authorization: key=AAAACnGjUfY:APA91bEqWPvvKL047X_heqKdicHUy83-SJimyD7i16vGxb2CXSw1F7eUZ-aVFMlF4UK-FjhCwjiyIKQPQiYFPl-Qt_WpdQetZQ1ZikHU5XTIsWc65T8_yT-btU7oWq2XUhGe8diyXWjm4BJQgNFe87tTUUdXTlbSgw" -H "Content-Type: application/json" https://fcm.googleapis.com/fcm/send -d '{
+curl -X POST -H "Authorization: key=<server_key>" -H "Content-Type: application/json" https://fcm.googleapis.com/fcm/send -d '{
 "notification": {
     "title": "Hi Duc",
     "body": "How are you?",
   },
-  "to": "dUQJNo9o2lw:APA91bGXgOGsRa1wxeQCp4WuAvv9UzQYknluVMydGV_C-Sa76xwU8_Oc1-hgfDEockpBIIZqwP9pjzGkq9BCFyehVenHoHcXZ5dd1wVPlNCgFDh1QwdLOnnpi7skMh0s3MebKfHERUNX"
+  "to": "<client_app_token (messaging.getToken())>"
   }
 '
 
