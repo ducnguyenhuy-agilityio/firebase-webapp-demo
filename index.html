@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Firebase Web App Demo</title>
+	<link rel="manifest" href="/manifest.json">
+
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-messaging.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyAKfUMyi45BTThTX5OX8UzIRRDWSANUEZA",
+	    authDomain: "my-project-test-1054.firebaseapp.com",
+	    databaseURL: "https://my-project-test-1054.firebaseio.com",
+	    projectId: "my-project-test-1054",
+	    storageBucket: "",
+	    messagingSenderId: "44856201718"
+	  };
+	  firebase.initializeApp(config);
+
+	  const messaging = firebase.messaging();
+
+    // Add the public key generated from the console here.
+    // messaging.usePublicVapidKey("AAAACnGjUfY:APA91bEqWPvvKL047X_heqKdicHUy83-SJimyD7i16vGxb2CXSw1F7eUZ-aVFMlF4UK-FjhCwjiyIKQPQiYFPl-Qt_WpdQetZQ1ZikHU5XTIsWc65T8_yT-btU7oWq2XUhGe8diyXWjm4BJQgNFe87tTUUdXTlbSgw");
+
+	  messaging.requestPermission()
+    .then(function() {
+		  console.log('Notification permission granted.');
+		   messaging.getToken()
+        .then(function(token) {
+          if (token) {
+            console.log(token);
+          } else {
+            console.log('token is null');
+          }
+        })
+        .catch(function(err) {
+          console.log('Get token has error.', err);
+        });
+		})
+    .catch(function(err) {
+		  console.log('Unable to get permission to notify.', err);
+		});
+
+    messaging.onMessage(function(payload) {
+      console.log('onMessage: ', payload);
+    });
+
+    messaging.onTokenRefresh(function() {
+      messaging.getToken().then(function(refreshedToken) {
+        console.log('new token', refreshedToken);
+      });
+    });
+	</script>
+</head>
+<body>
+
+</body>
+</html>
